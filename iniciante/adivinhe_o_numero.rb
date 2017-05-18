@@ -8,17 +8,17 @@ opcao = "s"
 
   while opcao == "s"
 
-  puts"Adivinhe o numero que estou pensando entre os numero 1 e 100"
+  puts "Adivinhe o numero que estou pensando entre os numero 1 e 100"
 
   #Variavel que  recebe um numero que vem como String(Digitado pelo usuario) e converte em Integer
-  seu_numero=gets.to_i
+  seu_numero = gets.to_i
 
   #Variavel para gerar numero entre 1 e 100
   pc_numero = Random.rand(99) + 1
 
 
   #Variavel para armazenar o numero de tentativas
-  tentativas =1
+  tentativas = 1
 
   while pc_numero != seu_numero
     if pc_numero > seu_numero
@@ -26,7 +26,7 @@ opcao = "s"
     else
       puts "O numero é menor que #{seu_numero}"
     end
-    tentativas +=1
+    tentativas += 1
 
     puts "Tente novamente: "
     seu_numero = gets.to_i
@@ -38,7 +38,11 @@ opcao = "s"
   # Pergunta se o usuario vai querer continuar jogando.
   puts "Deseja jogar novamente? (s/n)"
 
-  # O metodo chomp junto com o gets vai permitir que o usuario digite a opção e não pule uma linha
+=begin
+O metodo chomp junto com o gets vai permitir que o usuario digite a opão escolhida
+ e não grave a função do ENTER, gravando somente o valor escolhido, s ou n digitado na variavel opcao
+=end
+
   opcao = gets.chomp
 
 end
