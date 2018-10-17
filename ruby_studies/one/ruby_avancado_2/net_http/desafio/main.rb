@@ -1,0 +1,2 @@
+require_relative 'translate'
+start_translate
