@@ -4,13 +4,14 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    # @posts = Post.all
+    @posts = Post.order(created_at: :desc)
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @comments = @post.comments
+    @comments = @post.comments.order(created_at: :desc)
     @comment = Comment.new
   end
 
@@ -33,6 +34,7 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: 'Post criaado com sucesso!' }
         format.json { render :show, status: :created, location: @post }
       else
+        flash.now[:alert] = @post.errors.full_messages.to_sentence
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
@@ -44,7 +46,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post atualizado com sucesso@' }
+        format.html { redirect_to @post, notice: 'Post atualizado com sucesso!' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }
@@ -66,7 +68,7 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find(params[:id])
+      @post = Post.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
