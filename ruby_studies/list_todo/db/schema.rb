@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_03_013508) do
+ActiveRecord::Schema.define(version: 2018_11_03_040259) do
 
   create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "description", null: false
@@ -18,6 +18,9 @@ ActiveRecord::Schema.define(version: 2018_11_03_013508) do
     t.boolean "done", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "parent_id"
+    t.index ["parent_id"], name: "index_tasks_on_parent_id"
   end
 
+  add_foreign_key "tasks", "tasks", column: "parent_id"
 end
